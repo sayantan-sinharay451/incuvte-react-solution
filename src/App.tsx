@@ -1,48 +1,69 @@
-import { useState } from 'react';
+import { useState } from "react";
 
 const App = () => {
-  const [input, setInput] = useState('');
-  const [result] = useState(null);
+    const [input, setInput] = useState("");
+    const [result] = useState(null);
 
-  const handleCalculate = () => {};
+    const handleCalculate = () => {};
 
-  return (
-    <div style={{ padding: '20px', backgroundColor: '#fff', color: '#aaa' }}>
-      <img
-        src='https://images.unsplash.com/photo-1594352161389-11756265d1b5?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
-        width={600}
-        height={400}
-      />
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        handleCalculate();
+    };
 
-      <h2>String Calculator</h2>
+    const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setInput(e.target.value);
+    };
 
-      <h1 style={{ fontSize: '20px' }}>Enter numbers</h1>
+    return (
+        <main
+            style={{ padding: "20px", backgroundColor: "#fff", color: "#aaa" }}
+        >
+            <img
+                src="https://images.unsplash.com/photo-1594352161389-11756265d1b5?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                width={600}
+                height={400}
+                alt="A calculator, a pen, and a notebook on a wooden table."
+            />
 
-      <textarea
-        style={{ margin: '10px 0', color: '#aaa' }}
-        placeholder='Enter numbers'
-        value={input}
-        onChange={(e) => setInput(e.target.value)}
-      />
+            <h1>String Calculator</h1>
 
-      <div
-        onClick={handleCalculate}
-        style={{
-          padding: '10px',
-          backgroundColor: '#008cba',
-          color: '#fff',
-          border: 'none',
-        }}>
-        Calculate
-      </div>
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="numbers" style={{ fontSize: "20px" }}>
+                    Enter numbers
+                </label>
 
-      {result !== null && <p style={{ color: 'green' }}>Result: {result}</p>}
+                <textarea
+                    style={{ margin: "10px 0", color: "#aaa" }}
+                    id="number"
+                    placeholder="Enter numbers"
+                    value={input}
+                    onChange={handleInputChange}
+                />
 
-      <div role='alert'>
-        <p>Make sure you enter numbers correctly!</p>
-      </div>
-    </div>
-  );
+                <button
+                    type="submit"
+                    onClick={handleCalculate}
+                    style={{
+                        padding: "10px",
+                        backgroundColor: "#008cba",
+                        color: "#fff",
+                        border: "none",
+                    }}
+                >
+                    Calculate
+                </button>
+            </form>
+
+            {result !== null && (
+                <p style={{ color: "green" }}>Result: {result}</p>
+            )}
+
+            <div role="alert">
+                <p>Make sure you enter numbers correctly!</p>
+            </div>
+        </main>
+    );
 };
 
 export default App;
