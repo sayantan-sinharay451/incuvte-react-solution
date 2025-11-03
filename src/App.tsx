@@ -3,7 +3,8 @@ import "./App.css";
 
 const App = () => {
     const [input, setInput] = useState("");
-    const [result] = useState(null);
+    const [result, setResult] = useState(null);
+    const [error, setError] = useState("");
 
     const handleCalculate = () => {};
 
@@ -43,12 +44,15 @@ const App = () => {
             </form>
 
             {result !== null && (
-                <p style={{ color: "green" }}>Result: {result}</p>
+                <p className="result-para" aria-live="polite">
+                    Result: {result}
+                </p>
             )}
-
-            <div role="alert">
-                <p>Make sure you enter numbers correctly!</p>
-            </div>
+            {error && (
+                <div role="alert" className="error-alert">
+                    <p>Make sure you enter numbers correctly!</p>
+                </div>
+            )}
         </main>
     );
 };

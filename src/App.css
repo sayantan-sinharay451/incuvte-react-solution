@@ -4,6 +4,14 @@
     color: #aaa;
 }
 
+.result-para {
+    color: green;
+}
+
+.error-alert {
+    color: red;
+}
+
 label {
     font-size: 20px;
 }
