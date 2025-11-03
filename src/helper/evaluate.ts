@@ -10,6 +10,7 @@ export function evaluate(expression: string): string {
     if (!isNaN(parseFloat(token))) {
       outputQueue.push(parseFloat(token));
     } else if (token in precedence) {
+      // pops out all the operation if an incoming operation has less precedence
       while (
         operationStack.length > 0 &&
         operationStack[operationStack.length - 1] !== "(" &&
@@ -22,8 +23,14 @@ export function evaluate(expression: string): string {
         outputQueue.push(operationStack.pop()!);
       }
       operationStack.push(token);
+    } else if (token === '(') {
+      operationStack.push(token);
+    } else if (token === ')') {
+      while (operationStack.length > 0 && operationStack[operationStack.length - 1] !== '(') {
+        outputQueue.push(operationStack.pop()!);
+      }
+      operationStack.pop(); // Pop the '('
     }
-    console.log(outputQueue, operationStack);
   }
 
   while (operationStack.length > 0) {
@@ -35,6 +42,7 @@ export function evaluate(expression: string): string {
     if (typeof token === "number") {
       evaluationStack.push(token);
     } else {
+      // extracts the numbers that are pushed and perform the operations based on precedence 
       const right = evaluationStack.pop()!;
       const left = evaluationStack.pop()!;
       switch (token) {
