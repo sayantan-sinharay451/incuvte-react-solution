@@ -7,9 +7,9 @@ describe("stringCalculator", () => {
   });
 
 
-  // it("should calculate a simple addition", () => {
-  //   expect(stringCalculator("1 + 2")).toEqual([3]);
-  // });
+  it("should calculate a simple addition", () => {
+    expect(stringCalculator("1 + 2")).toEqual([3]);
+  });
 })
 
 

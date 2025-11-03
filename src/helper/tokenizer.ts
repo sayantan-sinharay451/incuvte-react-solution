@@ -1,6 +1,6 @@
 export function tokenize(expression: string): string[] {
   const tokens: string[] = [];
-  let currToken = '';
+  let currToken = ''
 
   // Method to push for number type tokens
   function pushCurrentToken() {
@@ -18,6 +18,7 @@ export function tokenize(expression: string): string[] {
   for (let i = 0; i < expression.length; i++) {
     const char = expression[i];
     if (char === ' ') {
+      pushCurrentToken();
       continue;
     }
     // Arithmetic symbols
@@ -40,5 +41,7 @@ export function tokenize(expression: string): string[] {
 
   pushCurrentToken() // push any remaining numbers
 
+
+  // todo: there should not be consecutive opp.  
   return tokens;
 }

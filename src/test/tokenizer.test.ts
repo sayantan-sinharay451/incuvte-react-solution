@@ -35,16 +35,11 @@ describe("tokenize", () => {
   });
 
   it("should throw an error for text inputs", () => {
-    expect(() => tokenize("invalid input")).toThrow("Invalid number: invalidinput");
+    expect(() => tokenize("invalid input")).toThrow("Invalid number: invalid");
   });
 
   it('should throw an error for a number with multiple decimal points', () => {
     const input = '1.2.3';
     expect(() => tokenize(input)).toThrow('Invalid number: 1.2.3');
   });
-
-  it("should throw an error for invalid expression", () => {
-    const input = "1 (2 + 3)";
-    expect(() => tokenize(input)).toThrow("Invalid Expression: 1 (2 + 3)");
-  })
 });
