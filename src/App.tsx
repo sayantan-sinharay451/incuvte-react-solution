@@ -4,16 +4,16 @@ import { stringCalculator } from "./stringCalculator";
 
 const App = () => {
     const [input, setInput] = useState("");
-    const [result, setResult] = useState<number | null>(null);
-    const [error, setError] = useState("");
+    const [result, setResult] = useState<string | null>(null);
+    const [error, setError] = useState<boolean | null>(null);
 
     const handleCalculate = () => {
         try {
-            const result = stringCalculator(input);
-            setResult(result);
-            setError("");
+            const ans = stringCalculator(input);
+            setResult(ans);
+            setError(null);
         } catch (e: any) {
-            setError(e.message);
+            setError(!!e.message);
             setResult(null);
         }
     };
@@ -25,7 +25,7 @@ const App = () => {
 
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setInput(e.target.value);
-        setError("");
+        setError(null);
         setResult(null);
     };
 
@@ -62,7 +62,7 @@ const App = () => {
             )}
             {error && (
                 <div id="error-message" role="alert" className="error">
-                    <p>{error}</p>
+                    <p>Please enter a numbers properly!</p>
                 </div>
             )}
         </main>
