@@ -19,6 +19,9 @@ label {
 textarea {
     margin: 10px 0;
     color: "#aaa";
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
 }
 
 button[type="submit"] {
@@ -26,4 +29,5 @@ button[type="submit"] {
     background-color: #008cba;
     color: #fff;
     border: none;
+    cursor: pointer;
 }
