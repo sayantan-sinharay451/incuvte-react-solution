@@ -1,11 +1,10 @@
 import { tokenize } from "./tokenizer";
 
-export function evaluate(expression: sting): number {
-  const precedence = { '+': 1, '-': 1, '*': 2, '/': 2, '^': 3, '%': 2 };
+export function evaluate(expression: string): string {
+  const precedence = { "+": 1, "-": 1, "*": 2, "/": 2, "^": 3, "%": 2 };
   const operationStack: string[] = [];
   const outputQueue: (string | number)[] = [];
   const tokens = tokenize(expression);
-
 
   for (const token of tokens) {
     if (!isNaN(parseFloat(token))) {
@@ -13,14 +12,18 @@ export function evaluate(expression: sting): number {
     } else if (token in precedence) {
       while (
         operationStack.length > 0 &&
-        operationStack[operationStack.length - 1] !== '(' &&
-        precedence[operationStack[operationStack.length - 1] as keyof typeof precedence] >= precedence[token as keyof typeof precedence]
+        operationStack[operationStack.length - 1] !== "(" &&
+        precedence[
+        operationStack[
+        operationStack.length - 1
+        ] as keyof typeof precedence
+        ] >= precedence[token as keyof typeof precedence]
       ) {
         outputQueue.push(operationStack.pop()!);
       }
       operationStack.push(token);
     }
-    console.log(outputQueue, operationStack)
+    console.log(outputQueue, operationStack);
   }
 
   while (operationStack.length > 0) {
@@ -29,34 +32,33 @@ export function evaluate(expression: sting): number {
 
   const evaluationStack: number[] = [];
   for (const token of outputQueue) {
-    if (typeof token === 'number') {
+    if (typeof token === "number") {
       evaluationStack.push(token);
     } else {
       const right = evaluationStack.pop()!;
       const left = evaluationStack.pop()!;
       switch (token) {
-        case '+':
+        case "+":
           evaluationStack.push(left + right);
           break;
-        case '-':
+        case "-":
           evaluationStack.push(left - right);
           break;
-        case '*':
+        case "*":
           evaluationStack.push(left * right);
           break;
-        case '/':
+        case "/":
           evaluationStack.push(left / right);
           break;
-        case '^':
+        case "^":
           evaluationStack.push(Math.pow(left, right));
           break;
-        case '%':
+        case "%":
           evaluationStack.push(left % right);
           break;
       }
     }
   }
-  console.log(evaluationStack);
 
-
+  return evaluationStack[0].toString();
 }

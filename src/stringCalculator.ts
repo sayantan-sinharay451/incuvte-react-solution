@@ -1,11 +1,11 @@
 import { evaluate } from "./helper/evaluate"
-import { tokenize } from "./helper/tokenizer";
 
 export const stringCalculator = (input: string): string => {
-
-
+  if (input === "") {
+    return "";
+  }
   const lines = input.split('\n')
-  const answers = lines.map(evaluate);
+  const answers: string[] = lines.map(evaluate);
 
-  return input;
+  return answers.join(",\n");
 }
