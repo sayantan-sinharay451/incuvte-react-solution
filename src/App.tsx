@@ -15,6 +15,7 @@ const App = () => {
 
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setInput(e.target.value);
+        setError("");
     };
 
     return (
@@ -36,6 +37,8 @@ const App = () => {
                     placeholder="Enter numbers"
                     value={input}
                     onChange={handleInputChange}
+                    aria-describedby={error ? "error-message" : undefined}
+                    aria-invalid={!!error}
                 />
 
                 <button type="submit" onClick={handleCalculate}>
