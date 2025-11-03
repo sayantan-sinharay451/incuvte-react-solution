@@ -7,5 +7,5 @@ export const stringCalculator = (input: string): string => {
   const lines = input.split('\n')
   const answers: string[] = lines.map(evaluate);
 
-  return answers.join(",\n");
+  return answers.filter(ans => ans !== "").join(",");
 }

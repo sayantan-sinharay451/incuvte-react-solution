@@ -1,10 +1,12 @@
 import { tokenize } from "./tokenizer";
+import { validateTokens } from "./validation";
 
 export function evaluate(expression: string): string {
   const precedence = { "+": 1, "-": 1, "*": 2, "/": 2, "^": 3, "%": 2 };
   const operationStack: string[] = [];
   const outputQueue: (string | number)[] = [];
   const tokens = tokenize(expression);
+  validateTokens(tokens);
 
   for (const token of tokens) {
     if (!isNaN(parseFloat(token))) {
@@ -66,6 +68,10 @@ export function evaluate(expression: string): string {
           break;
       }
     }
+  }
+
+  if (evaluationStack.length === 0) {
+    return ""
   }
 
   return evaluationStack[0].toString();

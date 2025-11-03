@@ -40,8 +40,5 @@ export function tokenize(expression: string): string[] {
   }
 
   pushCurrentToken() // push any remaining numbers
-
-
-  // todo: there should not be consecutive opp.  
   return tokens;
 }

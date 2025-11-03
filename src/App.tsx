@@ -1,19 +1,19 @@
 import { useState } from "react";
-import "./App.css";
 import { stringCalculator } from "./stringCalculator";
+import "./App.css";
 
 const App = () => {
     const [input, setInput] = useState("");
     const [result, setResult] = useState<string | null>(null);
-    const [error, setError] = useState<boolean | null>(null);
+    const [error, setError] = useState<Error | null>(null);
 
     const handleCalculate = () => {
         try {
             const ans = stringCalculator(input);
             setResult(ans);
             setError(null);
-        } catch (e: any) {
-            setError(!!e.message);
+        } catch (e) {
+            setError(e as Error);
             setResult(null);
         }
     };
@@ -57,12 +57,16 @@ const App = () => {
 
             {result !== null && (
                 <p className="result" aria-live="polite">
-                    Result: {result}
+                    <em>Result:</em>
+                    {result.split(",").map((res) => (
+                        <span key={res}>{res}</span>
+                    ))}
                 </p>
             )}
             {error && (
-                <div id="error-message" role="alert" className="error">
+                <div id="error-message" role="alert">
                     <p>Please enter a numbers properly!</p>
+                    <p>{error.message}</p>
                 </div>
             )}
         </main>
