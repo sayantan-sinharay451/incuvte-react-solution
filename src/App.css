@@ -1,0 +1,21 @@
+.container {
+    padding: 20px;
+    background-color: #fff;
+    color: #aaa;
+}
+
+label {
+    font-size: 20px;
+}
+
+textarea {
+    margin: 10px 0;
+    color: "#aaa";
+}
+
+button[type="submit"] {
+    padding: 10px;
+    background-color: #008cba;
+    color: #fff;
+    border: none;
+}

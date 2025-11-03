@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./App.css";
 
 const App = () => {
     const [input, setInput] = useState("");
@@ -16,9 +17,7 @@ const App = () => {
     };
 
     return (
-        <main
-            style={{ padding: "20px", backgroundColor: "#fff", color: "#aaa" }}
-        >
+        <main className="container">
             <img
                 src="https://images.unsplash.com/photo-1594352161389-11756265d1b5?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 width={600}
@@ -29,28 +28,16 @@ const App = () => {
             <h1>String Calculator</h1>
 
             <form onSubmit={handleSubmit}>
-                <label htmlFor="numbers" style={{ fontSize: "20px" }}>
-                    Enter numbers
-                </label>
+                <label htmlFor="number">Enter numbers</label>
 
                 <textarea
-                    style={{ margin: "10px 0", color: "#aaa" }}
                     id="number"
                     placeholder="Enter numbers"
                     value={input}
                     onChange={handleInputChange}
                 />
 
-                <button
-                    type="submit"
-                    onClick={handleCalculate}
-                    style={{
-                        padding: "10px",
-                        backgroundColor: "#008cba",
-                        color: "#fff",
-                        border: "none",
-                    }}
-                >
+                <button type="submit" onClick={handleCalculate}>
                     Calculate
                 </button>
             </form>
