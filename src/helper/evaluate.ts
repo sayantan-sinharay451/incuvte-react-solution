@@ -20,11 +20,43 @@ export function evaluate(expression: sting): number {
       }
       operationStack.push(token);
     }
-
-    while (operationStack.length > 0) {
-      outputQueue.push(operationStack.pop()!);
-    }
     console.log(outputQueue, operationStack)
   }
+
+  while (operationStack.length > 0) {
+    outputQueue.push(operationStack.pop()!);
+  }
+
+  const evaluationStack: number[] = [];
+  for (const token of outputQueue) {
+    if (typeof token === 'number') {
+      evaluationStack.push(token);
+    } else {
+      const right = evaluationStack.pop()!;
+      const left = evaluationStack.pop()!;
+      switch (token) {
+        case '+':
+          evaluationStack.push(left + right);
+          break;
+        case '-':
+          evaluationStack.push(left - right);
+          break;
+        case '*':
+          evaluationStack.push(left * right);
+          break;
+        case '/':
+          evaluationStack.push(left / right);
+          break;
+        case '^':
+          evaluationStack.push(Math.pow(left, right));
+          break;
+        case '%':
+          evaluationStack.push(left % right);
+          break;
+      }
+    }
+  }
+  console.log(evaluationStack);
+
 
 }
