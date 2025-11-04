@@ -1,7 +1,8 @@
 .container {
     padding: 20px;
     background-color: #fff;
-    color: #aaa;
+    /* Use high-contrast base text color for readability */
+    color: #222;
 }
 
 .result {
@@ -9,11 +10,13 @@
     flex-direction: column;
     margin-top: 20px;
     gap: 5px;
-    color: green;
+    /* Ensure result text has sufficient contrast */
+    color: #135d13; /* darker green for better contrast */
 }
 
 #error-message {
-    color: red;
+    /* Use a darker red for contrast against white */
+    color: #b00020;
 }
 
 label {
@@ -22,16 +25,25 @@ label {
 
 textarea {
     margin: 10px 0;
-    color: "#aaa";
+    /* Fix invalid color declaration and ensure high contrast */
+    color: #222;
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #8a8a8a; /* slightly darker for better contrast */
 }
 
 button[type="submit"] {
     padding: 10px;
-    background-color: #008cba;
+    /* Increase contrast: keep brand hue but darker for AA with white text */
+    background-color: #006494;
     color: #fff;
     border: none;
     cursor: pointer;
+}
+
+/* Provide clear focus indicators for keyboard users */
+textarea:focus-visible,
+button[type="submit"]:focus-visible {
+    outline: 3px solid #1a73e8;
+    outline-offset: 2px;
 }
