@@ -8,7 +8,13 @@ const App = () => {
     const [error, setError] = useState<Error | null>(null);
 
     const handleCalculate = () => {
+        // If empty input, show secondary message and skip calculation
         try {
+            if (input.trim() === "") {
+                setResult(null);
+                setError(new Error("Input is empty"));
+                return;
+            }
             const ans = stringCalculator(input);
             setResult(ans);
             setError(null);
@@ -45,15 +51,19 @@ const App = () => {
             <form onSubmit={handleSubmit}>
                 <label htmlFor="numbers">Enter numbers</label>
                 <p id="instructions">
-                    Enter one expression per line using digits and operators +, -, *, /. Example:
-                    <code>1+2</code> on a line, and <code>3*4</code> on the next.
+                    Enter one expression per line using digits and operators +,
+                    -, *, /. Example:
+                    <code>1+2</code> on a line, and <code>3*4</code> on the
+                    next.
                 </p>
                 <textarea
                     id="numbers"
                     placeholder="Enter numbers"
                     value={input}
                     onChange={handleInputChange}
-                    aria-describedby={error ? "instructions error-message" : "instructions"}
+                    aria-describedby={
+                        error ? "instructions error-message" : "instructions"
+                    }
                     aria-invalid={!!error}
                 />
 
@@ -72,8 +82,17 @@ const App = () => {
             )}
             {error && (
                 <div id="error-message" role="alert">
-                    <p>There’s a problem with your input. Please enter numbers and operators (+, -, *, /) only. Example: 1+2</p>
-                    <p>{error.message}</p>
+                    <p>
+                        There’s a problem with your input. Please enter numbers
+                        and operators (+, -, *, /) only. Example: 1+2
+                    </p>
+                    <p
+                        className="secondary-message"
+                        role="status"
+                        aria-live="polite"
+                    >
+                        {error.message}
+                    </p>
                 </div>
             )}
         </main>

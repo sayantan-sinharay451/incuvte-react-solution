@@ -12,6 +12,7 @@
     gap: 5px;
     /* Ensure result text has sufficient contrast */
     color: #135d13; /* darker green for better contrast */
+    list-style: disc inside;
 }
 
 #error-message {
@@ -41,7 +42,20 @@ button[type="submit"] {
     cursor: pointer;
 }
 
-/* Provide clear focus indicators for keyboard users */
+.secondary-message {
+    color: #666; /* grey tone; contrast ~5.7:1 on white */
+    margin-top: 10px;
+}
+
+.visually-hidden {
+    position: absolute !important;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+    clip: rect(1px, 1px, 1px, 1px);
+    white-space: nowrap;
+}
+
 textarea:focus-visible,
 button[type="submit"]:focus-visible {
     outline: 3px solid #1a73e8;
