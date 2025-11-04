@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { validateTokens } from "../helper/validation";
+import { validateTokens } from "../../helper/validation";
 
 describe("validateTokens", () => {
   it("should allow empty tokens (delegated to evaluate)", () => {

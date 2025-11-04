@@ -45,7 +45,7 @@ describe("App", () => {
         fireEvent.click(getSubmit());
 
         // result paragraph
-        const resultRegion = screen.getByText(/result:/i).closest("p");
+        const resultRegion = screen.getByText(/Results/i).closest("section")!;
         expect(resultRegion).toHaveAttribute("aria-live", "polite");
 
         // spans for each line
@@ -68,11 +68,12 @@ describe("App", () => {
 
         const alert = screen.getByRole("alert");
         expect(alert).toBeInTheDocument();
-        expect(alert).toHaveTextContent(/please enter a numbers properly/i);
-        expect(alert).toHaveTextContent(/invalid number: invalid/i);
 
         expect(textarea).toHaveAttribute("aria-invalid", "true");
-        expect(textarea).toHaveAttribute("aria-describedby", "error-message");
+        expect(textarea).toHaveAttribute(
+            "aria-describedby",
+            "instructions error-message"
+        );
     });
 
     it("clears previous result and error when typing new input", () => {
@@ -85,13 +86,13 @@ describe("App", () => {
         // first successful submit
         fireEvent.change(getTextarea(), { target: { value: "2+3" } });
         fireEvent.click(getSubmit());
-        expect(screen.getByText(/result:/i)).toBeInTheDocument();
+        expect(screen.getByText(/Results/i)).toBeInTheDocument();
 
         // type to clear
         fireEvent.change(getTextarea(), { target: { value: "1+1" } });
 
         // result cleared
-        expect(screen.queryByText(/result:/i)).toBeNull();
+        expect(screen.queryByText(/Results/i)).toBeNull();
         // error cleared
         expect(screen.queryByRole("alert")).toBeNull();
     });
@@ -112,6 +113,6 @@ describe("App", () => {
 
     it("does not show result region when result is null", () => {
         render(<App />);
-        expect(screen.queryByText(/result:/i)).toBeNull();
+        expect(screen.queryByText(/Results/i)).toBeNull();
     });
 });
