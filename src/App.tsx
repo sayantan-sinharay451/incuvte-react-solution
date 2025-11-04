@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { stringCalculator } from "./stringCalculator";
 import "./App.css";
 
@@ -6,6 +6,7 @@ const App = () => {
     const [input, setInput] = useState("");
     const [result, setResult] = useState<string | null>(null);
     const [error, setError] = useState<Error | null>(null);
+    const alertRef = useRef<HTMLDivElement | null>(null);
 
     const handleCalculate = () => {
         // If empty input, show secondary message and skip calculation
@@ -29,6 +30,12 @@ const App = () => {
         handleCalculate();
     };
 
+    useEffect(() => {
+        if (error) {
+            alertRef.current?.focus();
+        }
+    }, [error]);
+
     const handleInputChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
         setInput(e.target.value);
         setError(null);
@@ -36,7 +43,9 @@ const App = () => {
     };
 
     return (
-        <main className="container">
+        <>
+            <a href="#main" className="skip-link">Skip to main content</a>
+            <main id="main" className="container">
             <img
                 src="https://images.unsplash.com/photo-1594352161389-11756265d1b5?q=80&w=2574&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 width={600}
@@ -64,6 +73,7 @@ const App = () => {
                     aria-describedby={
                         error ? "instructions error-message" : "instructions"
                     }
+                    aria-errormessage={error ? "error-message" : undefined}
                     aria-invalid={!!error}
                 />
 
@@ -72,7 +82,7 @@ const App = () => {
 
             {result !== null && (
                 <section aria-live="polite" aria-label="Results">
-                    <h2 className="visually-hidden">Results</h2>
+                    <h2>Results</h2>
                     <ul className="result">
                         {result.split(",").map((res) => (
                             <li key={res}>{res}</li>
@@ -81,7 +91,7 @@ const App = () => {
                 </section>
             )}
             {error && (
-                <div id="error-message" role="alert">
+                <div id="error-message" role="alert" ref={alertRef} tabIndex={-1}>
                     <p>
                         There’s a problem with your input. Please enter numbers
                         and operators (+, -, *, /) only. Example: 1+2
@@ -96,6 +106,7 @@ const App = () => {
                 </div>
             )}
         </main>
+        </>
     );
 };
 

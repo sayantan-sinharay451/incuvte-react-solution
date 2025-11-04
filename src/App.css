@@ -5,6 +5,22 @@
     color: #222;
 }
 
+/* Skip link: visible on focus to bypass blocks */
+.skip-link {
+    position: absolute;
+    left: -9999px;
+    top: auto;
+    background: #fff;
+    color: #1a73e8;
+    border: 2px solid #1a73e8;
+    padding: 8px 12px;
+    z-index: 1000;
+}
+.skip-link:focus {
+    left: 20px;
+    top: 20px;
+}
+
 .result {
     display: flex;
     flex-direction: column;
@@ -45,15 +61,6 @@ button[type="submit"] {
 .secondary-message {
     color: #666; /* grey tone; contrast ~5.7:1 on white */
     margin-top: 10px;
-}
-
-.visually-hidden {
-    position: absolute !important;
-    height: 1px;
-    width: 1px;
-    overflow: hidden;
-    clip: rect(1px, 1px, 1px, 1px);
-    white-space: nowrap;
 }
 
 textarea:focus-visible,
